@@ -141,12 +141,12 @@ class BuildCommand extends Command
         foreach ($iterator as $item) {
             $targetPath = $dstDir.'/'.substr($item->getPathname(), strlen($srcDir) + 1);
             if ($item->isDir()) {
-                if (!is_dir($targetPath)) {
+                if (! is_dir($targetPath)) {
                     mkdir($targetPath, 0755, true);
                 }
             } else {
                 $dir = dirname($targetPath);
-                if (!is_dir($dir)) {
+                if (! is_dir($dir)) {
                     mkdir($dir, 0755, true);
                 }
                 copy($item->getPathname(), $targetPath);
@@ -160,11 +160,11 @@ class BuildCommand extends Command
         $output->write('Extracting data files...');
         $zipPath = '/tmp/opencc.zip';
         $dest = '/tmp/opencc';
-        if (!is_dir($dest)) {
+        if (! is_dir($dest)) {
             mkdir($dest, 0755, true);
         }
 
-        $zip = new \ZipArchive();
+        $zip = new \ZipArchive;
         if ($zip->open($zipPath) !== true) {
             throw new \RuntimeException('Unable to open downloaded zip.');
         }
